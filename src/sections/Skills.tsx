@@ -1,42 +1,137 @@
+'use client'
+import { useState, useEffect } from 'react'
+
 export default function Skills() {
-    const skillCategories = [
-      {
-        title: "Programming Languages",
-        skills: ["C", "Javascript", "SQL", "PHP"]
-      },
-      {
-        title: "Web Technologies",
-        skills: ["HTML-5", "CSS-3", "Bootstrap-5.3", "Git", "GitHub", "AJAX", "JSON", "Webpack", "jQuery", "Redux", "Wordpress"]
-      },
-      {
-        title: "Frameworks",
-        skills: ["Bootstrap", "React-JS", "Next-JS", "Laravel", "MySQL (RDBMS)"]
-      },
-      {
-        title: "Interests",
-        skills: ["Machine Learning", "DevOps", "NextJS", "NestJS"]
-      }
-    ]
-  
-    return (
-      <section id="skills" className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-12 text-center">Skills</h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            {skillCategories.map((category, index) => (
-              <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-                <h3 className="text-xl font-bold mb-4 text-blue-600">{category.title}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill, idx) => (
-                    <span key={idx} className="bg-gray-100 px-3 py-1 rounded-full text-sm">
-                      {skill}
-                    </span>
+  // Define skill categories with descriptions for each skill
+  const skillCategories = [
+    {
+      title: "Programming Languages",
+      skills: [
+        { name: "C", description: "Strong foundation in C programming with experience in data structures and algorithms." },
+        { name: "Javascript", description: "Proficient in modern JavaScript with ES6+ features for dynamic web applications." },
+        { name: "SQL", description: "Experienced in database query optimization and complex data retrieval." },
+        { name: "PHP", description: "Skilled in server-side scripting and building dynamic web applications." }
+      ]
+    },
+    {
+      title: "Web Technologies",
+      skills: [
+        { name: "HTML-5", description: "Expert in semantic markup and modern HTML5 features." },
+        { name: "CSS-3", description: "Advanced styling with animations, flexbox, and grid layouts." },
+        { name: "Bootstrap-5.3", description: "Rapid UI development with the latest Bootstrap framework." },
+        { name: "Git", description: "Version control and collaborative development workflows." },
+        { name: "GitHub", description: "Project management and code collaboration." },
+        { name: "AJAX", description: "Asynchronous data loading for seamless user experiences." },
+        { name: "JSON", description: "Data interchange format for APIs and configuration." },
+        { name: "Webpack", description: "Module bundling and asset optimization." },
+        { name: "jQuery", description: "DOM manipulation and event handling." },
+        { name: "Redux", description: "State management for complex React applications." },
+        { name: "Wordpress", description: "Content management and custom theme development." }
+      ]
+    },
+    {
+      title: "Frameworks",
+      skills: [
+        { name: "Bootstrap", description: "Responsive design system for rapid UI development." },
+        { name: "React-JS", description: "Component-based UI development with virtual DOM." },
+        { name: "Next-JS", description: "Server-side rendering and static site generation for React." },
+        { name: "Laravel", description: "PHP framework for elegant syntax and rapid development." },
+        { name: "MySQL (RDBMS)", description: "Relational database design and optimization." }
+      ]
+    },
+    {
+      title: "Interests",
+      skills: [
+        { name: "Machine Learning", description: "Exploring algorithms and data-driven applications." },
+        { name: "DevOps", description: "Continuous integration and deployment automation." },
+        { name: "NextJS", description: "Advanced features and optimizations for React applications." },
+        { name: "NestJS", description: "Progressive Node.js framework for scalable server-side applications." }
+      ]
+    }
+  ]
+
+  // Custom hook for rotating through skills in each category
+  const useSkillRotation = (skillsLength, interval = 3000) => {
+    const [activeIndex, setActiveIndex] = useState(0);
+    
+    useEffect(() => {
+      if (skillsLength <= 1) return;
+      
+      const timer = setInterval(() => {
+        setActiveIndex((current) => (current + 1) % skillsLength);
+      }, interval);
+      
+      return () => clearInterval(timer);
+    }, [skillsLength, interval]);
+    
+    return activeIndex;
+  };
+
+  // Create a separate active index for each category
+  const activeIndices = skillCategories.map(category => 
+    useSkillRotation(category.skills.length)
+  );
+
+  return (
+    <section id="skills" className="py-20 bg-white">
+      <div className="max-w-6xl mx-auto px-4">
+        <h2 className="text-3xl font-bold mb-12 text-center">Skills</h2>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+          {skillCategories.map((category, catIndex) => (
+            <div 
+              key={catIndex} 
+              className="bg-gray-50 rounded-xl shadow-lg overflow-hidden border border-gray-100"
+            >
+              {/* Category Header */}
+              <div className="bg-gradient-to-r bg-blue-300 px-4 py-3">
+                <h3 className="text-xs font-bold text-white uppercase tracking-wider">{category.title}</h3>
+              </div>
+              
+              {/* Skills Slider */}
+              <div className="p-4 h-40 flex flex-col bg-gray-100">
+                {/* Skill Name */}
+                <div className="text-center mb-2">
+                  <span className="text-lg font-semibold text-gray-800 inline-block">
+                    {category.skills[activeIndices[catIndex]].name}
+                  </span>
+                </div>
+                
+                {/* Skill Description */}
+                <div className="flex-1 flex items-center justify-center">
+                  <p className="text-gray-600 text-center text-xs animate-fadeIn px-2">
+                    {category.skills[activeIndices[catIndex]].description}
+                  </p>
+                </div>
+                
+                {/* Indicator Dots */}
+                <div className="flex justify-center gap-1 mt-2">
+                  {category.skills.map((_, index) => (
+                    <span 
+                      key={index}
+                      className={`h-1.5 rounded-full transition-all duration-300 ${
+                        index === activeIndices[catIndex] 
+                          ? 'bg-blue-500 w-3' 
+                          : 'bg-gray-300 w-1.5'
+                      }`}
+                    ></span>
                   ))}
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
-      </section>
-    )
-  }
+      </div>
+      
+      {/* Add animation styles */}
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(5px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.5s ease-out forwards;
+        }
+      `}</style>
+    </section>
+  )
+}
