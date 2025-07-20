@@ -55,6 +55,27 @@ export default function About() {
         image: '/images/projects/landing.jpg',
         liveLink: 'https://asaduzzaman285.github.io/landing-Page-01/',
         github: 'https://github.com/asaduzzaman285/landing-Page-01'
+      },
+      {
+        name: 'LessNever',
+        description: 'A product-based e-commerce platform focused on digital and physical goods.',
+        image: '/images/projects/lessnever.jpg',
+        liveLink: 'https://www.lessnever.com/',
+        github: 'https://github.com/Asaduzzaman285/LessNever'
+      },
+      {
+        name: 'PERP Pilot Mock Test',
+        description: 'Online mock test platform for students and professionals built with dynamic Laravel backend.',
+        image: '/images/projects/perppilot.jpg',
+        liveLink: 'https://mocktest.perppilot.com/',
+        github: 'https://github.com/Asaduzzaman285/mock-test'
+      },
+      {
+        name: 'WinText BD Admin Portal',
+        description: 'Admin dashboard for WinText BD with SMS service integration and user control modules.',
+        image: '/images/projects/wintext.jpg',
+        liveLink: 'https://portal2.wintextbd.com/',
+        github: 'https://github.com/saifurrahman1193/wintext_new_portal_api'
       }
     ]
   }
@@ -97,7 +118,7 @@ export default function About() {
           </div>
           <div className="md:w-2/3">
             <p className="text-gray-600 text-sm mb-8">
-              I am an experienced Frontend Developer with over a decade of professional expertise in 
+              I am an experienced Full Stack Developer with over a 1.8+ years of professional expertise in 
               the field. Throughout my career, I have had the privilege of collaborating with prestigious 
               organizations, contributing to their success and growth.
             </p>
@@ -105,39 +126,47 @@ export default function About() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
                           {/* Languages Card */}
                           <button
-                onClick={() => setIsOpen({ ...isOpen, languages: true })}
-                className="p-4 rounded-lg bg-white shadow-sm border border-gray-100 hover:shadow-md transition text-left flex flex-col justify-center h-[150px]"
-              >
-                <div className="text-lg mb-2 inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-50">
-                  <span>💻</span>
-                </div>
-                <h3 className="font-medium text-sm mb-1">Languages</h3>
-                <p className="text-xs text-gray-600 line-clamp-2">HTML, CSS, JavaScript, React.js, Next.js</p>
-              </button>
-              
-              {/* Education Card */}
-              <button
-                onClick={() => setIsOpen({ ...isOpen, education: true })}
-                className="p-4 rounded-lg bg-white shadow-sm border border-gray-100 hover:shadow-md transition text-left flex flex-col justify-center h-[150px]"
-              >
-                <div className="text-lg mb-2 inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-50">
-                  <span>🎓</span>
-                </div>
-                <h3 className="font-medium text-sm mb-1">Education</h3>
-                <p className="text-xs text-gray-600 line-clamp-2">B.Tech in Computer Science</p>
-              </button>
+  onClick={() => setIsOpen({ ...isOpen, languages: true })}
+  className="p-4 rounded-lg bg-white shadow-sm border border-gray-100 hover:shadow-md hover:bg-blue-300 hover:text-white transition text-left flex flex-col justify-center h-[150px] cursor-pointer"
+>
+  <div className="text-lg mb-2 inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-50">
+    <span>💻</span>
+  </div>
+  <h3 className="font-medium text-sm mb-1">Languages</h3>
+  <p className="text-xs text-gray-600 line-clamp-2">
+    JS, React.js, Next.js, Php, C, HTML, CSS
+  </p>
+</button>
 
-              {/* Projects Card */}
-              <button
-                onClick={() => setIsOpen({ ...isOpen, projects: true })}
-                className="p-4 rounded-lg bg-white shadow-sm border border-gray-100 hover:shadow-md transition text-left flex flex-col justify-center h-[150px]"
-              >
-                <div className="text-lg mb-2 inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-50">
-                  <span>💼</span>
-                </div>
-                <h3 className="font-medium text-sm mb-1">Projects</h3>
-                <p className="text-xs text-gray-600 line-clamp-2">Built more than 5 projects</p>
-              </button>
+              
+      {/* Education Card */}
+<button
+  onClick={() => setIsOpen({ ...isOpen, education: true })}
+  className="p-4 rounded-lg bg-white shadow-sm border border-gray-100 hover:shadow-md hover:bg-blue-300 hover:text-white transition text-left flex flex-col justify-center h-[150px] cursor-pointer"
+>
+  <div className="text-lg mb-2 inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-50">
+    <span>🎓</span>
+  </div>
+  <h3 className="font-medium text-sm mb-1">Education</h3>
+  <p className="text-xs text-gray-600 line-clamp-2">
+    Bsc Engineering in Computer Science
+  </p>
+</button>
+
+{/* Projects Card */}
+<button
+  onClick={() => setIsOpen({ ...isOpen, projects: true })}
+  className="p-4 rounded-lg bg-white shadow-sm border border-gray-100 hover:shadow-md hover:bg-blue-300 hover:text-white transition text-left flex flex-col justify-center h-[150px] cursor-pointer"
+>
+  <div className="text-lg mb-2 inline-flex items-center justify-center w-8 h-8 rounded-full bg-gray-50">
+    <span>💼</span>
+  </div>
+  <h3 className="font-medium text-sm mb-1">Projects</h3>
+  <p className="text-xs text-gray-600 line-clamp-2">
+    Built more than 10+ projects
+  </p>
+</button>
+
             </div>
 
         
@@ -243,11 +272,11 @@ export default function About() {
               
               <div 
                 ref={projectSliderRef}
-                className="overflow-hidden"
+                className="overflow-hidden w-[400px] mx-auto"
               >
-                <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentProject * 100}%)` }}>
+                <div className="flex transition-transform duration-300" style={{ transform: `translateX(-${currentProject * 400}px)` }}>
                   {projects.items.map((project, index) => (
-                    <div key={index} className="w-full flex-shrink-0">
+                    <div key={index} className="w-[400px] flex-shrink-0">
                       <div className="rounded-xl overflow-hidden border border-gray-200">
                         <div className="relative h-[250px]">
                           <iframe

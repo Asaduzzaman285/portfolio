@@ -4,30 +4,7 @@ import { useState, useEffect, useRef } from 'react'
 export default function Experience() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [autoRotate, setAutoRotate] = useState(true);
-  const timerRef = useRef(null);
-  
-  // Auto-rotate experiences every 10 seconds if autoRotate is true
-  useEffect(() => {
-    if (autoRotate) {
-      timerRef.current = setInterval(() => {
-        setActiveIndex((prevIndex) => (prevIndex + 1) % experiences.length);
-      }, 10000);
-    }
-    
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [autoRotate]);
-  
-  // Handle manual selection
-  const handleSelectExperience = (index) => {
-    setActiveIndex(index);
-    setAutoRotate(false); // Stop auto-rotation when user interacts
-    
-    // Clear existing timer
-    if (timerRef.current) clearInterval(timerRef.current);
-  };
-  
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const experiences = [
     {
       company: "Wintel Limited",
@@ -72,9 +49,32 @@ export default function Experience() {
       keywords: ["HTML", "CSS", "React.js", "Tailwind", "Laravel"]
     }
   ];
+  // Auto-rotate experiences every 10 seconds if autoRotate is true
+  useEffect(() => {
+    if (autoRotate) {
+      timerRef.current = setInterval(() => {
+        setActiveIndex((prevIndex) => (prevIndex + 1) % experiences.length);
+      }, 10000);
+    }
+    
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [autoRotate, experiences.length]);
+  
+  // Handle manual selection
+  const handleSelectExperience = (index:number) => {
+    setActiveIndex(index);
+    setAutoRotate(false); // Stop auto-rotation when user interacts
+    
+    // Clear existing timer
+    if (timerRef.current) clearInterval(timerRef.current);
+  };
+  
+
 
   // Function to highlight keywords in text
-  const highlightKeywords = (text, keywords) => {
+  const highlightKeywords = (text: string, keywords: string[]) => {
     let highlightedText = text;
     keywords.forEach(keyword => {
       const regex = new RegExp(`\\b${keyword}\\b`, 'gi');
@@ -99,7 +99,7 @@ export default function Experience() {
                     <h3 className="text-xl font-bold text-gray-800">{experiences[activeIndex].position}</h3>
                     <h4 className="text-lg text-blue-600">{experiences[activeIndex].company}</h4>
                   </div>
-                </div>
+                </div> 
                 
                 <p className="text-gray-600 mb-6 text-sm border-l-2 border-gray-200 pl-3 italic">
                   {experiences[activeIndex].period}

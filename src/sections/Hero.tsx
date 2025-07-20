@@ -13,7 +13,7 @@ export default function Hero() {
           priority
         />
       </div>
-      <p className="text-lg mb-4">Hi! I'm Asaduzzaman Asad 👋</p>
+      <p className="text-lg mb-4">Hi! I&apos;m Asaduzzaman Asad 👋</p>
       <h1 className="text-5xl md:text-6xl font-normal mb-4 leading-tight">
         An Web Artisan<br />
         based in dhaka.

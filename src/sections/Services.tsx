@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Dialog } from '@headlessui/react'
 
 export default function Services() {
@@ -93,6 +93,7 @@ export default function Services() {
     setIsOpen(true)
   }
 
+
   const nextSlide = () => {
     if (currentSlide < services[currentService].slides.length - 1) {
       setCurrentSlide(currentSlide + 1)
@@ -111,14 +112,21 @@ export default function Services() {
     resetSlideTimer()
   }
 
-  const resetSlideTimer = () => {
+  const resetSlideTimer = useCallback(() => {
     if (slideTimerRef.current) {
       clearTimeout(slideTimerRef.current)
     }
     slideTimerRef.current = setTimeout(() => {
       nextSlide()
     }, 5000) // 5 seconds
-  }
+  }, [currentService, services]);
+
+  useEffect(() => {
+    resetSlideTimer();
+    return () => {
+      if (slideTimerRef.current) clearTimeout(slideTimerRef.current);
+    }
+  }, [currentSlide, resetSlideTimer]);
 
   useEffect(() => {
     if (isOpen) {
@@ -130,7 +138,7 @@ export default function Services() {
         clearTimeout(slideTimerRef.current)
       }
     }
-  }, [isOpen, currentSlide, currentService])
+  }, [isOpen, resetSlideTimer])
 
   return (
     <section id="services" className="py-20">
@@ -138,8 +146,7 @@ export default function Services() {
         <p className="text-center text-gray-600 mb-4">What I offer</p>
         <h2 className="text-4xl font-normal text-center mb-8">My services</h2>
         <p className="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-          I am a frontend developer from California, USA with 10 years of experience in multiple 
-          companies like Microsoft, Tesla and Apple.
+        I offer full stack development services with a strong focus on Laravel, React.js, and Vue.js. From pixel-perfect frontend design to secure backend systems and scalable web apps, I deliver complete solutions tailored to your needs.
         </p>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -148,7 +155,7 @@ export default function Services() {
               key={index} 
               onClick={() => openModal(index)}
               className={`p-5 rounded-xl border border-gray-100 hover:shadow-lg transition h-[220px] flex flex-col cursor-pointer transform hover:-translate-y-1 duration-200 ${
-                index === 1 ? 'bg-purple-50' : 'bg-white'
+                index === 0 ? 'bg-purple-50' : 'bg-white'
               }`}
             >
               <div className="flex items-center mb-3 gap-2">

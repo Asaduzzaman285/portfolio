@@ -1,9 +1,78 @@
 'use client'
 import { useState, useEffect } from 'react'
+interface Skill {
+  name: string;
+  description: string;
+}
+interface SkillCategoryType {
+  title: string;
+  skills: Skill[];
+}
+// Custom hook for rotating through skills in each category
+function useSkillRotation(skillsLength: number, interval = 3000) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  
+  useEffect(() => {
+    if (skillsLength <= 1) return;
+    
+    const timer = setInterval(() => {
+      setActiveIndex((current) => (current + 1) % skillsLength);
+    }, interval);
+    
+    return () => clearInterval(timer);
+  }, [skillsLength, interval]);
+  
+  return activeIndex;
+}
+
+// Separate component for each skill category
+function SkillCategory({ category }: { category: SkillCategoryType }) {
+  const activeIndex = useSkillRotation(category.skills.length);
+  
+  return (
+    <div className="bg-gray-50 rounded-xl shadow-lg overflow-hidden border border-gray-100">
+      {/* Category Header */}
+      <div className="bg-gradient-to-r bg-blue-300 px-4 py-3">
+        <h3 className="text-xs font-bold text-white uppercase tracking-wider">{category.title}</h3>
+      </div>
+      
+      {/* Skills Slider */}
+      <div className="p-4 h-40 flex flex-col bg-gray-100">
+        {/* Skill Name */}
+        <div className="text-center mb-2">
+          <span className="text-lg font-semibold text-gray-800 inline-block">
+            {category.skills[activeIndex].name}
+          </span>
+        </div>
+        
+        {/* Skill Description */}
+        <div className="flex-1 flex items-center justify-center">
+          <p className="text-gray-600 text-center text-xs animate-fadeIn px-2">
+            {category.skills[activeIndex].description}
+          </p>
+        </div>
+        
+        {/* Indicator Dots */}
+        <div className="flex justify-center gap-1 mt-2">
+          {category.skills.map((_, idx: number) => (
+            <span 
+              key={idx}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                idx === activeIndex 
+                  ? 'bg-blue-500 w-3' 
+                  : 'bg-gray-300 w-1.5'
+              }`}
+            ></span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function Skills() {
   // Define skill categories with descriptions for each skill
-  const skillCategories = [
+  const skillCategories: SkillCategoryType[] = [
     {
       title: "Programming Languages",
       skills: [
@@ -48,29 +117,7 @@ export default function Skills() {
         { name: "NestJS", description: "Progressive Node.js framework for scalable server-side applications." }
       ]
     }
-  ]
-
-  // Custom hook for rotating through skills in each category
-  const useSkillRotation = (skillsLength, interval = 3000) => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    
-    useEffect(() => {
-      if (skillsLength <= 1) return;
-      
-      const timer = setInterval(() => {
-        setActiveIndex((current) => (current + 1) % skillsLength);
-      }, interval);
-      
-      return () => clearInterval(timer);
-    }, [skillsLength, interval]);
-    
-    return activeIndex;
-  };
-
-  // Create a separate active index for each category
-  const activeIndices = skillCategories.map(category => 
-    useSkillRotation(category.skills.length)
-  );
+  ];
 
   return (
     <section id="skills" className="py-20 bg-white">
@@ -78,46 +125,11 @@ export default function Skills() {
         <h2 className="text-3xl font-bold mb-12 text-center">Skills</h2>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {skillCategories.map((category, catIndex) => (
-            <div 
+            <SkillCategory 
               key={catIndex} 
-              className="bg-gray-50 rounded-xl shadow-lg overflow-hidden border border-gray-100"
-            >
-              {/* Category Header */}
-              <div className="bg-gradient-to-r bg-blue-300 px-4 py-3">
-                <h3 className="text-xs font-bold text-white uppercase tracking-wider">{category.title}</h3>
-              </div>
-              
-              {/* Skills Slider */}
-              <div className="p-4 h-40 flex flex-col bg-gray-100">
-                {/* Skill Name */}
-                <div className="text-center mb-2">
-                  <span className="text-lg font-semibold text-gray-800 inline-block">
-                    {category.skills[activeIndices[catIndex]].name}
-                  </span>
-                </div>
-                
-                {/* Skill Description */}
-                <div className="flex-1 flex items-center justify-center">
-                  <p className="text-gray-600 text-center text-xs animate-fadeIn px-2">
-                    {category.skills[activeIndices[catIndex]].description}
-                  </p>
-                </div>
-                
-                {/* Indicator Dots */}
-                <div className="flex justify-center gap-1 mt-2">
-                  {category.skills.map((_, index) => (
-                    <span 
-                      key={index}
-                      className={`h-1.5 rounded-full transition-all duration-300 ${
-                        index === activeIndices[catIndex] 
-                          ? 'bg-blue-500 w-3' 
-                          : 'bg-gray-300 w-1.5'
-                      }`}
-                    ></span>
-                  ))}
-                </div>
-              </div>
-            </div>
+              category={category} 
+            
+            />
           ))}
         </div>
       </div>
