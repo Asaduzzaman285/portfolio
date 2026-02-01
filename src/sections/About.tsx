@@ -36,7 +36,7 @@ export default function About() {
             <h2 className="text-3xl font-bold mb-8 text-foreground">About Me</h2>
             <div className="space-y-6 text-secondary text-lg leading-relaxed">
               <p>
-                I am an experienced Full Stack Developer with over 1.8+ years of professional expertise.
+                I am an experienced Full Stack Developer with 3 years of professional expertise.
                 I specialize in building robust, scalable web applications that solve real-world problems.
               </p>
               <p>

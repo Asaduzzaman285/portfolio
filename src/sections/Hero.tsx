@@ -14,15 +14,15 @@ export default function Hero() {
         />
       </div>
 
-      <p className="text-accent font-semibold tracking-wide uppercase text-sm mb-4">Full Stack Engineer</p>
+      <p className="text-accent font-semibold tracking-wide uppercase text-sm mb-4">Mid-Level Full Stack Engineer</p>
 
       <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-[1.1] tracking-tight text-foreground">
         Building Scalable <br className="hidden md:block" />
-        <span className="text-accent">Web Solutions.</span>
+        <span className="text-accent">Digital Solutions.</span>
       </h1>
 
       <p className="text-secondary text-lg md:text-xl max-w-2xl mb-10 leading-relaxed font-medium">
-        I am a dedicated Full Stack Developer from Dhaka, specialized in creating high-performance applications with React, Next.js, and Laravel.
+        I am a dedicated Full Stack Engineer from Dhaka, specialized in architecting high-performance applications with React, Next.js, Node.js, and Laravel.
       </p>
 
       <div className="flex flex-col sm:flex-row gap-4">
@@ -34,8 +34,8 @@ export default function Hero() {
           <span className="group-hover:translate-x-1 transition-transform">→</span>
         </a>
         <a
-          href="/assets/ASADUZZAMAN_ASAD.pdf"
-          download="Asaduzzaman_Asad_CV.pdf"
+          href="/assets/asaduzzaman_resume.pdf"
+          download="asaduzzaman_resume.pdf"
           className="bg-card border border-border text-foreground px-8 py-4 rounded-full font-bold hover:bg-border transition-all flex items-center justify-center gap-2"
         >
           Download CV

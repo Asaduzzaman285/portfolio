@@ -61,41 +61,49 @@ export default function Projects() {
   const allProjects: Project[] = [
     {
       id: 1,
+      title: "Limited Edition Sneaker Drop",
+      category: "Full Stack (Real-time)",
+      image: "/images/sneaker-drop.png",
+      url: "https://sneaker-drop-frontend.vercel.app",
+      stack: ["React", "Node.js", "PostgreSQL", "Socket.io", "Docker"]
+    },
+    {
+      id: 2,
       title: "Lyricist Association Portal",
       category: "Full Stack",
-      image: "/images/ReactNext.jpg",
+      image: "/images/lyricist_portal.png",
       url: "https://lyricistsassociationbd.com/",
       stack: ["Next.js", "Laravel", "MySQL"]
     },
     {
-      id: 2,
+      id: 3,
       title: "WinText SMS Dashboard",
       category: "Backend",
-      image: "/images/ReactNext.jpg",
+      image: "/images/wintext_dashboard.png",
       url: "https://portal2.wintextbd.com/",
       stack: ["React", "PHP API", "SMS Integration"]
     },
     {
-      id: 3,
+      id: 4,
       title: "PERP Pilot Exam System",
       category: "LMS",
-      image: "/images/ReactNext.jpg",
+      image: "/images/perp_lms.png",
       url: "http://mocktest.perppilot.com",
       stack: ["Laravel", "Blade", "Livewire"]
     },
     {
-      id: 4,
+      id: 5,
       title: "LessNever E-commerce",
       category: "E-commerce",
-      image: "/images/ReactNext.jpg",
+      image: "/images/lessnever_ecommerce.png",
       url: "https://www.lessnever.com/",
       stack: ["Next.js", "Stripe", "Tailwind"]
     },
     {
-      id: 5,
+      id: 6,
       title: "Remote Jobs Aggregator",
       category: "Job Board",
-      image: "/images/ReactNext.jpg",
+      image: "/images/remote_jobs.png",
       url: "https://github.com/Asaduzzaman285/Remote-jobs",
       stack: ["React", "API Fetching"]
     }

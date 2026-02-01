@@ -4,7 +4,7 @@ export default function Experience() {
   const experiences = [
     {
       company: "Wintel Limited",
-      position: "Junior Full Stack Developer",
+      position: "Mid Level Full Stack Engineer",
       period: "Dec 2024 – Present",
       description: "Architecting and developing scalable web applications using React/Next.js and PHP-Laravel. Leading API design and integration for robust system communication.",
       achievements: [
@@ -50,32 +50,44 @@ export default function Experience() {
           </p>
         </div>
 
-        <div className="relative border-l border-border ml-4 md:ml-0 md:left-1/2 md:-translate-x-px">
+        <div className="relative max-w-3xl mx-auto space-y-12">
+          {/* Vertical Guide Line */}
+          <div className="absolute left-0 md:left-[180px] top-2 bottom-2 w-px bg-border hidden md:block"></div>
+
           {experiences.map((exp, index) => (
-            <div key={index} className="mb-12 relative">
+            <div key={index} className="relative flex flex-col md:flex-row gap-8 items-start group">
+
+              {/* Date Column */}
+              <div className="md:w-[180px] md:text-right flex-shrink-0 md:pr-8 md:pt-1">
+                <span className="inline-block px-3 py-1 rounded-full bg-accent/5 text-accent font-bold text-xs tracking-wider border border-accent/10 group-hover:bg-accent group-hover:text-background transition-colors duration-300">
+                  {exp.period}
+                </span>
+              </div>
+
               {/* Timeline Dot */}
-              <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-accent border-4 border-background shadow-sm"></div>
+              <div className="absolute left-[175px] top-2 w-2.5 h-2.5 rounded-full bg-accent ring-4 ring-background hidden md:block z-10 group-hover:scale-125 transition-transform duration-300"></div>
 
-              <div className={`md:w-1/2 ${index % 2 === 0 ? 'md:pr-12 md:text-right md:ml-0' : 'md:pl-12 md:ml-auto md:text-left'}`}>
-                <div className="flex flex-col mb-1">
-                  <span className="text-accent font-bold text-xs uppercase tracking-widest mb-2">{exp.period}</span>
-                  <h3 className="text-xl font-bold text-foreground">{exp.position}</h3>
-                  <h4 className="text-secondary font-medium mb-4">{exp.company}</h4>
+              {/* Content Card */}
+              <div className="flex-grow bg-card border border-border p-6 rounded-2xl hover:border-accent/50 hover:shadow-lg transition-all duration-300 w-full">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-accent transition-colors">{exp.position}</h3>
+                    <h4 className="text-secondary font-medium text-sm">{exp.company}</h4>
+                  </div>
                 </div>
 
-                <div className="bg-card border border-border p-6 rounded-2xl hover:border-accent transition-all duration-300">
-                  <p className="text-secondary text-sm leading-relaxed mb-4">
-                    {exp.description}
-                  </p>
-                  <ul className={`text-xs text-foreground/80 space-y-2 ${index % 2 === 0 ? 'md:list-none' : 'list-none'}`}>
-                    {exp.achievements.map((item, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="text-accent mt-1">•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+                <p className="text-secondary text-sm leading-relaxed mb-6">
+                  {exp.description}
+                </p>
+
+                <ul className="space-y-3">
+                  {exp.achievements.map((item, i) => (
+                    <li key={i} className="flex items-start gap-3 text-sm text-foreground/80">
+                      <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0"></span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}

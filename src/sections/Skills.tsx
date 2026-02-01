@@ -11,31 +11,31 @@ interface SkillCategoryType {
 // Custom hook for rotating through skills in each category
 function useSkillRotation(skillsLength: number, interval = 3000) {
   const [activeIndex, setActiveIndex] = useState(0);
-  
+
   useEffect(() => {
     if (skillsLength <= 1) return;
-    
+
     const timer = setInterval(() => {
       setActiveIndex((current) => (current + 1) % skillsLength);
     }, interval);
-    
+
     return () => clearInterval(timer);
   }, [skillsLength, interval]);
-  
+
   return activeIndex;
 }
 
 // Separate component for each skill category
 function SkillCategory({ category }: { category: SkillCategoryType }) {
   const activeIndex = useSkillRotation(category.skills.length);
-  
+
   return (
     <div className="bg-gray-50 rounded-xl shadow-lg overflow-hidden border border-gray-100">
       {/* Category Header */}
       <div className="bg-gradient-to-r bg-blue-300 px-4 py-3">
         <h3 className="text-xs font-bold text-white uppercase tracking-wider">{category.title}</h3>
       </div>
-      
+
       {/* Skills Slider */}
       <div className="p-4 h-40 flex flex-col bg-gray-100">
         {/* Skill Name */}
@@ -44,24 +44,23 @@ function SkillCategory({ category }: { category: SkillCategoryType }) {
             {category.skills[activeIndex].name}
           </span>
         </div>
-        
+
         {/* Skill Description */}
         <div className="flex-1 flex items-center justify-center">
           <p className="text-gray-600 text-center text-xs animate-fadeIn px-2">
             {category.skills[activeIndex].description}
           </p>
         </div>
-        
+
         {/* Indicator Dots */}
         <div className="flex justify-center gap-1 mt-2">
           {category.skills.map((_, idx: number) => (
-            <span 
+            <span
               key={idx}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                idx === activeIndex 
-                  ? 'bg-blue-500 w-3' 
+              className={`h-1.5 rounded-full transition-all duration-300 ${idx === activeIndex
+                  ? 'bg-blue-500 w-3'
                   : 'bg-gray-300 w-1.5'
-              }`}
+                }`}
             ></span>
           ))}
         </div>
@@ -99,13 +98,14 @@ export default function Skills() {
       ]
     },
     {
-      title: "Frameworks",
+      title: "Technologies & Databases",
       skills: [
-        { name: "Bootstrap", description: "Responsive design system for rapid UI development." },
-        { name: "React-JS", description: "Component-based UI development with virtual DOM." },
-        { name: "Next-JS", description: "Server-side rendering and static site generation for React." },
-        { name: "Laravel", description: "PHP framework for elegant syntax and rapid development." },
-        { name: "MySQL (RDBMS)", description: "Relational database design and optimization." }
+        { name: "React.js", description: "Building interactive UIs with component-based architecture." },
+        { name: "Next.js", description: "Full-stack React framework for production-grade applications." },
+        { name: "Node.js", description: "Server-side JavaScript runtime for scalable backend systems." },
+        { name: "Laravel", description: "PHP framework for robust and elegant web application development." },
+        { name: "PostgreSQL", description: "Advanced open-source relational database for complex queries." },
+        { name: "MySQL", description: "Reliable relational database management system." }
       ]
     },
     {
@@ -125,15 +125,15 @@ export default function Skills() {
         <h2 className="text-3xl font-bold mb-12 text-center">Skills</h2>
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           {skillCategories.map((category, catIndex) => (
-            <SkillCategory 
-              key={catIndex} 
-              category={category} 
-            
+            <SkillCategory
+              key={catIndex}
+              category={category}
+
             />
           ))}
         </div>
       </div>
-      
+
       {/* Add animation styles */}
       <style jsx>{`
         @keyframes fadeIn {
