@@ -6,7 +6,7 @@ export default function Contact() {
           <div>
             <h2 className="text-3xl font-bold mb-6 text-foreground">Get In Touch</h2>
             <p className="text-secondary mb-10 leading-relaxed">
-              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
+              I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision.
               Whether you have a specific project in mind or just want to say hi, feel free to reach out.
             </p>
 
